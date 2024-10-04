@@ -52,7 +52,7 @@ terramate run -X --tags trial:btp terraform plan
 ```
 
 ```bash
-terramate run -X --tags --tags trial:btp terraform apply -auto-approve
+terramate run -X --tags trial:btp terraform apply -auto-approve
 ```
 
 ### Step 2: Provisioning of the SAP Cloud Integration capability
