@@ -79,6 +79,7 @@ variable "cf_org_name" {
 variable "cf_org_id" {
   type        = string
   description = "The ID of the Cloud Foundry org."
+  default     = ""
 }
 
 variable "cf_space_name" {
