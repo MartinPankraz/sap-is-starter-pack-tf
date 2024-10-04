@@ -97,10 +97,6 @@ generate_hcl "_terramate_generated_variables.tf" {
     # ------------------------------------------------------------------------------------------------------
     # Scenario-specific variables
     # ------------------------------------------------------------------------------------------------------
-    variable "s4_connection_pw" {
-      type        = string
-      description = "Password for the RFC destination to the S/4HANA system"
-      sensitive   = true
-    }
+
   }
 }

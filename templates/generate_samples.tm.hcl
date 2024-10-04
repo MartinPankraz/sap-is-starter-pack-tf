@@ -25,6 +25,5 @@ generate_file "_terramate_terraform.tfvars.sample" {
     cf_org_name              = "sap_is_test_cf"
     # Available trial regions: ap21, us10
     region           = "ap21"
-    s4_connection_pw = ""
   EOF
 }

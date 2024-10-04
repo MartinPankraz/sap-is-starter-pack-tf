@@ -164,7 +164,6 @@ generate_hcl "_terramate_generated_main_btp.tf" {
       cf_org_users         = ${jsonencode(var.cf_org_users)}
       cf_space_developers  = ${jsonencode(var.cf_space_developers)}
       cf_space_managers    = ${jsonencode(var.cf_space_managers)}
-      s4_connection_pw     = "${var.s4_connection_pw}"
       EOT
       filename = "../cf-setup/terraform.tfvars"
     }
