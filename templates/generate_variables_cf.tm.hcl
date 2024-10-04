@@ -20,6 +20,12 @@ generate_hcl "_terramate_generated_variables.tf" {
       description = "The username for the SAP BTP account."
     }
 
+variable "subaccount_id" {
+      type        = string
+      description = "The ID of the subaccount."
+      default     = ""
+    }
+
     variable "pi_administrator" {
       type        = list(string)
       description = "The email address of the PI administrator."

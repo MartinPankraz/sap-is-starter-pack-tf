@@ -115,6 +115,7 @@ generate_hcl "_terramate_generated_main_btp.tf" {
       content  = <<-EOT
       globalaccount        = "${var.globalaccount}"
       btp_username         = "${var.btp_username}"
+      subaccount_id        = "${btp_subaccount.integration_suite.id}"
       pi_administrator     = ${jsonencode(var.pi_administrator)}
       pi_business_expert   = ${jsonencode(var.pi_business_expert)}
       pi_integration_developer = ${jsonencode(var.pi_integration_developer)}
