@@ -26,3 +26,7 @@ import {
 import {
   source = "./templates/generate_main_cf.tm.hcl"
 }
+
+import {
+  source = "./templates/generate_samples.tm.hcl"
+}

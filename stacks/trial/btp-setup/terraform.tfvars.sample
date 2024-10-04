@@ -1,0 +1,20 @@
+// TERRAMATE: GENERATED AUTOMATICALLY DO NOT EDIT
+
+btp_username = "email-associated-with-s-user-id@your-company.com"
+cf_org_admins = [
+]
+cf_org_name = "sap_is_test_cf"
+cf_org_users = [
+]
+cf_space_developers = [
+  "email-associated-with-s-user-id@your-company.com",
+]
+cf_space_managers = [
+  "email-associated-with-s-user-id@your-company.com",
+]
+globalaccount = "${trialplaceholder}"
+integration_provisioners = [
+  "email-associated-with-s-user-id@your-company.com",
+]
+region           = "ap21"
+s4_connection_pw = ""

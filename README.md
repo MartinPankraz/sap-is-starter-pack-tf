@@ -56,6 +56,78 @@ Verify the SAP Process Integration Runtime was created successfully by checking 
 
 Happy integrating with SAP BTP!
 
+## Setup Terramate
+
+You have the option top deploy the setup either in a productive or a trial landscape of SAP BTP. Both options are available in different Terramate stacks.
+
+### Initialitze the setup
+
+To initialize the setup for the trial stacks execute the following command:
+
+```bash
+terramate run -X --tags trial terraform init
+```
+
+To initialize the setup for the productions stacks execute the following command:
+
+```bash
+terramate run -X --tags prod terraform init
+```
+
+
+### Setup SAP BTP
+
+To execute the planning for the SAP BTP trial stack
+
+```bash
+terramate run -X --tags trial:btp terraform plan
+```
+
+To execute the planning for the SAP BTP production stack
+
+```bash
+terramate run -X --tags prod:btp terraform plan
+```
+
+To execute the apply for the SAP BTP trial stack
+
+```bash
+terramate run -X --tags --tags trial:btp terraform apply
+```
+
+To execute the apply for the SAP BTP production stack
+
+```bash
+terramate run -X --tags prod:btp terraform apply
+```
+
+
+### Execute "terraform apply"
+
+To execute the planning for the CF trial stack
+
+```bash
+terramate run -X --tags trial:cf terraform plan
+```
+
+To execute the planning for the CF production stack
+
+```bash
+terramate run -X --tags prod:cf terraform plan
+```
+
+To execute the apply for the CF trial stack
+
+```bash
+terramate run -X --tags trial:cf terraform apply
+```
+
+To execute the apply for the CF production stack
+
+```bash
+terramate run -X --tags prod:cf terraform apply
+```
+
 ## Contributing
 
 If you want to contribute to this repository, please open an issue or a pull request.
