@@ -108,9 +108,4 @@ resource "cloudfoundry_service_instance" "destination__lite" {
       }
     }
   })
-  timeouts = {
-    create = "1h"
-    delete = "1h"
-    update = "1h"
-  }
 }
