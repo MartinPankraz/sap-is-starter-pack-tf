@@ -44,25 +44,6 @@ resource "cloudfoundry_space_role" "space_manager" {
 }
 
 # ------------------------------------------------------------------------------------------------------
-# Create a CLoud Foundry service instance for Integration Suite
-# ------------------------------------------------------------------------------------------------------
-data "cloudfoundry_service" "is_service_plans" {
-  name = "integration_suite"
-}
-
-resource "cloudfoundry_service_instance" "is__standard_edition" {
-  depends_on   = [cloudfoundry_space_role.space_manager, cloudfoundry_space_role.space_developer]
-  name         = "cpi"
-  space        = cloudfoundry_space.cf_space.id
-  service_plan = data.cloudfoundry_service.is_service_plans.service_plans["standard_edition"]
-  type         = "managed"
-  timeouts = {
-    create = "1h"
-    delete = "1h"
-    update = "1h"
-  }
-}
-# ------------------------------------------------------------------------------------------------------
 # Create a CLoud Foundry service instance for Process Integration Runtime
 # ------------------------------------------------------------------------------------------------------
 data "cloudfoundry_service" "it_rt_service_plans" {
@@ -116,7 +97,6 @@ resource "cloudfoundry_service_instance" "destination__lite" {
             "Description"       = "SAP S/4HANA Connection via RFC",
             "ProxyType"         = "OnPremise",
             "Type"              = "RFC",
-            "URL"               = "https://your-server:50000",
             "User"              = "BPINST"
             "Password"          = "${var.s4_connection_pw}"
             "jco.client.ashost" = "your-virtual-host-name"

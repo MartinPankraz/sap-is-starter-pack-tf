@@ -11,4 +11,5 @@ terraform {
 # Configure the BTP Provider
 provider "btp" {
   globalaccount = var.globalaccount
+  username      = var.BTP_USERNAME
 }

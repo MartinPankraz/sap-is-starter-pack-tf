@@ -33,6 +33,39 @@ module "sap-btp-entitlements" {
 }
 
 # ------------------------------------------------------------------------------------------------------
+# Create Integration Suite for BTP trial
+# ------------------------------------------------------------------------------------------------------
+
+resource "btp_subaccount_subscription" "integrationsuite" {
+  subaccount_id = btp_subaccount.integration_suite.id
+  app_name      = "integrationsuite-trial"
+  plan_name     = "trial"
+  depends_on    = [module.sap-btp-entitlements]
+}
+
+# ------------------------------------------------------------------------------------------------------
+# Assign the provisioner roles to the users
+# ------------------------------------------------------------------------------------------------------
+resource "btp_subaccount_role_collection_assignment" "Integration_Provisioner" {
+  for_each             = toset(var.integration_provisioners)
+  user_name            = each.value
+  subaccount_id        = btp_subaccount.integration_suite.id
+  role_collection_name = "Integration_Provisioner"
+  depends_on           = [btp_subaccount_subscription.integrationsuite]
+}
+
+# ------------------------------------------------------------------------------------------------------
+# Create Integration Suite for BTP live landscape
+# ------------------------------------------------------------------------------------------------------
+
+#resource "btp_subaccount_subscription" "integrationsuite" {
+#  subaccount_id = btp_subaccount.integration_suite.id
+#  app_name      = "integrationsuite-trial"
+#  plan_name     = "trial"
+#  depends_on    = [module.sap-btp-entitlements]
+#}
+
+# ------------------------------------------------------------------------------------------------------
 # Create Cloud Foundry environment instance
 # ------------------------------------------------------------------------------------------------------
 data "btp_subaccount_environments" "all" {
@@ -43,12 +76,33 @@ resource "terraform_data" "cf_landscape_label" {
   input = length(var.cf_landscape_label) > 0 ? var.cf_landscape_label : [for env in data.btp_subaccount_environments.all.values : env if env.service_name == "cloudfoundry" && env.environment_type == "cloudfoundry"][0].landscape_label
 }
 
+# ------------------------------------------------------------------------------------------------------
+# Create CF instance for live landscapes
+# ------------------------------------------------------------------------------------------------------
+
+#resource "btp_subaccount_environment_instance" "cloudfoundry" {
+#  subaccount_id    = btp_subaccount.integration_suite.id
+#  name             = var.instance_name
+#  environment_type = "cloudfoundry"
+#  service_name     = "cloudfoundry"
+#  plan_name        = "standard"
+#  landscape_label  = terraform_data.cf_landscape_label.output#
+
+#  parameters = jsonencode({
+#    instance_name = local.subaccount_cf_org
+#  })
+#}
+
+# ------------------------------------------------------------------------------------------------------
+# Create CF instance for BTP trial landscapes
+# ------------------------------------------------------------------------------------------------------
+
 resource "btp_subaccount_environment_instance" "cloudfoundry" {
   subaccount_id    = btp_subaccount.integration_suite.id
   name             = var.instance_name
   environment_type = "cloudfoundry"
   service_name     = "cloudfoundry"
-  plan_name        = "standard"
+  plan_name        = "trial"
   landscape_label  = terraform_data.cf_landscape_label.output
 
   parameters = jsonencode({

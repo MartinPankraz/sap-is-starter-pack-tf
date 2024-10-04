@@ -6,6 +6,11 @@ variable "globalaccount" {
   description = "The globalaccount subdomain where the sub account shall be created."
 }
 
+variable "BTP_USERNAME" {
+  type        = string
+  description = "The username for the SAP BTP account."
+}
+
 variable "create_tfvars_file_for_cf" {
   type        = bool
   description = "Create a tfvars file for the Cloud Foundry setup."
@@ -33,7 +38,13 @@ variable "region" {
 variable "subaccount_admins" {
   type        = list(string)
   description = "Defines the colleagues who are added to each subaccount as subaccount administrators."
-  default     = [""]
+  default     = []
+}
+
+variable "integration_provisioners" {
+  type        = list(string)
+  description = "Defines the colleagues who are added to each subaccount as Integration Suite Provisioner."
+  default     = []
 }
 
 variable "instance_name" {
@@ -44,15 +55,34 @@ variable "instance_name" {
     condition     = can(regex("^[a-zA-Z0-9_\\-\\.]{1,32}$", var.instance_name))
     error_message = "Please provide a valid instance name."
   }
+  default = "sap-is-instance"
 }
+
+# ------------------------------------------------------------------------------------------------------
+# Live-landscape specific variables
+# ------------------------------------------------------------------------------------------------------
+
+#variable "entitlements" {
+#  type        = map(list(string))
+#  description = "The entitlements for the subaccount."
+#  default = {
+#    "destination"       = ["lite"],
+#    "integrationsuite" = ["standard_edition=1"],
+#    "it-rt"             = ["integration-flow"]
+#  }
+#}
+
+# ------------------------------------------------------------------------------------------------------
+# BTP Trial-landscape specific variables
+# ------------------------------------------------------------------------------------------------------
 
 variable "entitlements" {
   type        = map(list(string))
   description = "The entitlements for the subaccount."
   default = {
-    "destination"       = ["lite"],
-    "integration_suite" = ["standard_edition"],
-    "it_rt"             = ["integration_flow=1"]
+    "destination"            = ["lite"],
+    "integrationsuite-trial" = ["trial=1"],
+    "it-rt"                  = ["integration-flow"]
   }
 }
 
@@ -64,7 +94,6 @@ variable "cf_landscape_label" {
   description = "In case there are multiple environments available for a subaccount, you can use this label to choose with which one you want to go. If nothing is given, we take by default the first available."
   default     = ""
 }
-
 
 variable "cf_org_name" {
   type        = string
