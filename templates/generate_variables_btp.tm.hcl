@@ -49,7 +49,7 @@ generate_hcl "_terramate_generated_variables.tf" {
       default     = ""
     }
 
-variable "subaccount_id" {
+    variable "subaccount_id" {
       type        = string
       description = "The ID of the subaccount."
       default     = ""
