@@ -32,8 +32,8 @@ generate_hcl "_terramate_generated_output_btp.tf" {
       description = "The email address of the PI business expert."
     }
 
-    output "pi_intgration_developer" {
-      value       = var.pi_intgration_developer
+    output "pi_integration_developer" {
+      value       = var.pi_integration_developer
       description = "The email address of the PI integration developer."
     }
 

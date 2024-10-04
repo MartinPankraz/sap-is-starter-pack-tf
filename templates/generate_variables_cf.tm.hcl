@@ -32,7 +32,7 @@ generate_hcl "_terramate_generated_variables.tf" {
       default     = []
     }
 
-    variable "pi_intgration_developer" {
+    variable "pi_integration_developer" {
       type        = list(string)
       description = "The email address of the PI integration developer."
       default     = []

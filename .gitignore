@@ -40,3 +40,4 @@ terraform.rc
 .env
 
 # Terramate generated files
+_terramate*
