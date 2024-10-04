@@ -7,7 +7,7 @@ generate_file "terraform.tfvars.sample" {
   }
 
   lets {
-    trialplaceholder = tm_ternary(tm_contains(terramate.stack.tags, "trial"), "subdomain-of-SAP-BTP-trial-globalaccount", "subdomain-of-SAP-BTP-trial-globalaccount")
+    trialplaceholder = tm_ternary(tm_contains(terramate.stack.tags, "trial"), "subdomain-of-SAP-BTP-trial-globalaccount", "subdomain-of-SAP-BTP-globalaccount")
   }
 
   content = <<-EOF

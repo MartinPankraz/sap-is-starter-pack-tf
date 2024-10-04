@@ -1,5 +1,5 @@
 # Use this file to configure the BTP setup. Rename this file to terraform.tfvars and fill in the values for the variables.
-globalaccount            = "subdomain-of-SAP-BTP-trial-globalaccount"
+globalaccount            = "subdomain-of-SAP-BTP-globalaccount"
 btp_username             = "email-associated-with-s-user-id@your-company.com"
 integration_provisioners = ["email-associated-with-s-user-id@your-company.com"]
 cf_org_admins            = []
