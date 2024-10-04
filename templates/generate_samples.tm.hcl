@@ -1,4 +1,4 @@
-generate_hcl "terraform.tfvars.sample" {
+generate_file "terraform.tfvars.sample" {
   stack_filter {
     project_paths = [
       "stacks/prod/btp*",
@@ -10,9 +10,9 @@ generate_hcl "terraform.tfvars.sample" {
     trialplaceholder = tm_ternary(tm_contains(terramate.stack.tags, "trial"), "subdomain-of-SAP-BTP-trial-globalaccount", "subdomain-of-SAP-BTP-trial-globalaccount")
   }
 
-  content {
+  content = <<-EOF
     # Use this file to configure the BTP setup. Rename this file to terraform.tfvars and fill in the values for the variables.
-    globalaccount            = "${trialplaceholder}"
+    globalaccount            = "${let.trialplaceholder}"
     btp_username             = "email-associated-with-s-user-id@your-company.com"
     integration_provisioners = ["email-associated-with-s-user-id@your-company.com"]
     cf_org_admins            = []
@@ -23,5 +23,5 @@ generate_hcl "terraform.tfvars.sample" {
     # Available trial regions: ap21, us10
     region           = "ap21"
     s4_connection_pw = ""
-  }
+  EOF
 }
