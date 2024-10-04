@@ -49,6 +49,12 @@ generate_hcl "_terramate_generated_variables.tf" {
       default     = ""
     }
 
+variable "subaccount_id" {
+      type        = string
+      description = "The ID of the subaccount."
+      default     = ""
+    }
+
     variable "region" {
       type        = string
       description = "The region where the sub account shall be created in."
