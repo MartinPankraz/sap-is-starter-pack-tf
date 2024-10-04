@@ -10,6 +10,8 @@ generate_hcl "_terramate_generated_main_btp.tf" {
     cloudfoundryplan             = tm_ternary(tm_contains(terramate.stack.tags, "trial"), "trial", "standard")
     integrationsuitesrvcname     = tm_ternary(tm_contains(terramate.stack.tags, "trial"), "integrationsuite-trial", "integrationsuite")
     integrationsuitesrvcplanname = tm_ternary(tm_contains(terramate.stack.tags, "trial"), "trial", "standard_edition")
+    destinationsrvcname          = tm_ternary(tm_contains(terramate.stack.tags, "trial"), "destination", "destination")
+    destinationsrvcplanname      = tm_ternary(tm_contains(terramate.stack.tags, "trial"), "lite", "lite")
   }
 
   content {
@@ -105,6 +107,47 @@ generate_hcl "_terramate_generated_main_btp.tf" {
       user_name            = each.value
       subaccount_id        = btp_subaccount.integration_suite.id
       role_collection_name = "Subaccount Administrator"
+    }
+
+
+    # ------------------------------------------------------------------------------------------------------
+    # Create destination service + RFC destination to S/4HANA
+    # ------------------------------------------------------------------------------------------------------
+    data "btp_subaccount_service_plan" "destination" {
+      subaccount_id = btp_subaccount.integration_suite.id
+      offering_name = "${let.destinationsrvcname}"
+      name          = "${let.destinationsrvcplanname}"
+      depends_on    = [module.sap-btp-entitlements]
+    }
+
+    resource "btp_subaccount_service_instance" "destination" {
+      subaccount_id  = btp_subaccount.integration_suite.id
+      serviceplan_id = data.btp_subaccount_service_plan.destination.id
+      name           = "cpi-destination"
+      depends_on     = [data.btp_subaccount_service_plan.destination]
+      parameters = jsonencode({
+        "HTML5Runtime_enabled" : "true",
+        "init_data" : {
+          "instance" : {
+            "existing_destinations_policy" : "update",
+            "destinations" : [
+              {
+                "AuthorizationType" = "CONFIGURED_USER",
+                "Name"              = "SID_RFC",
+                "Description"       = "SAP S/4HANA Connection via RFC",
+                "ProxyType"         = "OnPremise",
+                "Type"              = "RFC",
+                "User"              = "BPINST"
+                "Password"          = "${var.s4_connection_pw}"
+                "jco.client.ashost" = "your-virtual-host-name"
+                "jco.client.client" = "100"
+                "jco.client.lang"   = "EN"
+                "jco.client.sysnr"  = "00"
+              }
+            ]
+          }
+        }
+      })
     }
 
     # ------------------------------------------------------------------------------------------------------
