@@ -1,6 +1,6 @@
 # SAP Integration Suite starter-set with Terraform
 
-This repository contains a starter-set for the setup of the SAP Integration Suite on SAP BTP leveraging Terraform.
+This repository contains a starter-set for the setup of the SAP Integration Suite on SAP BTP leveraging Terraform and Terramate.
 
 ## Setup process
 
@@ -33,15 +33,27 @@ You have the option top deploy the setup either in a productive or a trial lands
 1. Clone [this repository](https://github.com/MartinPankraz/sap-is-starter-pack-tf.git) to your local machine.
 1. Navigate to the `sap-btp-setup` directory.
 1. Use the `terraform.tfvars.sample` file to create a `terraform.tfvars` file with your details. Start with the global account subdomain, which ends with "-ga" and continue from there.
-1. Provide your BTP credential (S-User password) as environment variable to avoid maintaining it as plain text variable on tfvars.
+1. Provide your BTP and CF credential (S-User password) as environment variable to avoid maintaining it as plain text variable on tfvars.
 
 ```bash
-    $env:BTP_PASSWORD='your-password'
+    $env:BTP_PASSWORD='your-S-User-password'
+    $env:CF_PASSWORD='your-S-User-password'
 ```
 
-1. Run `terraform init` to initialize the Terraform configuration.
-1. Run `terraform plan` to see the changes that will be applied.
-1. Run `terraform apply -auto-approve` to apply the Terraform configuration.
+1. Run `terramate generate` to initialize the Terramate managed Terraform configuration.
+1. To initialize the setup for the trial stacks execute the following command. Replace `trial` with `prod` for the production stacks.
+
+```bash
+terramate run -X --tags trial --parallel 2 terraform init
+```
+
+```bash
+terramate run -X --tags trial:btp terraform plan
+```
+
+```bash
+terramate run -X --tags --tags trial:btp terraform apply -auto-approve
+```
 
 ### Step 2: Provisioning of the SAP Cloud Integration capability
 
@@ -50,70 +62,14 @@ You have the option top deploy the setup either in a productive or a trial lands
 
 ### Step 3: Setup of the Cloud Foundry environment
 
-To initialize the setup for the trial stacks execute the following command:
-
-```bash
-terramate run -X --tags trial --parallel 2 terraform init
-```
-
-To initialize the setup for the productions stacks execute the following command:
-
-```bash
-terramate run -X --tags prod --parallel 2 terraform init
-```
-
-
-### Setup SAP BTP
-
-To execute the planning for the SAP BTP trial stack
-
-```bash
-terramate run -X --tags trial:btp terraform plan
-```
-
-To execute the planning for the SAP BTP production stack
-
-```bash
-terramate run -X --tags prod:btp terraform plan
-```
-
-To execute the apply for the SAP BTP trial stack
-
-```bash
-terramate run -X --tags --tags trial:btp terraform apply
-```
-
-To execute the apply for the SAP BTP production stack
-
-```bash
-terramate run -X --tags prod:btp terraform apply
-```
-
-
-### Execute "terraform apply"
-
-To execute the planning for the CF trial stack
+To conclude the setup with the newly provisioned role collections for Integration Suite execute the following commands. Again, replace `trial` with `prod` for the production stacks.
 
 ```bash
 terramate run -X --tags trial:cf terraform plan
 ```
 
-To execute the planning for the CF production stack
-
 ```bash
-terramate run -X --tags prod:cf terraform plan
-```
-
-To execute the apply for the CF trial stack
-
-```bash
-terramate run -X --tags trial:cf terraform apply
-```
-
-To execute the apply for the CF production stack
-
-```bash
-terramate run -X --tags prod:cf terraform apply
+terramate run -X --tags trial:cf terraform apply -auto-approve
 ```
 
 Verify the SAP Process Integration Runtime was created successfully by checking the service instances in the Cloud Foundry environment and its generated service key from the BTP portal. Check the instance details area that opens to the right, select the Actions menu using the button with the three dots `...` .
