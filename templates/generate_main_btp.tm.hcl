@@ -128,17 +128,12 @@ generate_hcl "_terramate_generated_main_btp.tf" {
       parameters = jsonencode({
         "HTML5Runtime_enabled" : "true",
         "init_data" : {
-          "instance" : {
+          "subaccount" : {
             "existing_destinations_policy" : "update",
             "destinations" : [
               {
-                "AuthorizationType" = "CONFIGURED_USER",
                 "Name"              = "SID_RFC",
-                "Description"       = "SAP S/4HANA Connection via RFC",
-                "ProxyType"         = "OnPremise",
                 "Type"              = "RFC",
-                "User"              = "BPINST"
-                "Password"          = "${var.s4_connection_pw}"
                 "jco.client.ashost" = "your-virtual-host-name"
                 "jco.client.client" = "100"
                 "jco.client.lang"   = "EN"

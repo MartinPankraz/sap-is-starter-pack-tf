@@ -72,7 +72,7 @@ terramate run -X --tags trial:cf terraform plan
 terramate run -X --tags trial:cf terraform apply -auto-approve
 ```
 
-Verify the SAP Process Integration Runtime was created successfully by checking the service instances in the Cloud Foundry environment and its generated service key from the BTP portal. Check the instance details area that opens to the right, select the Actions menu using the button with the three dots `...` .
+Verify the SAP Process Integration Runtime was created successfully by checking the service instances in the Cloud Foundry environment, its generated service key, and the Destination named "SID_RFC" from the BTP portal. Check the instance details area that opens to the right, select the Actions menu using the button with the three dots `...` .
 
 Happy integrating with SAP BTP!
 

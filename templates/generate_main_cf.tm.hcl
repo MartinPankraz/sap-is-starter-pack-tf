@@ -1,4 +1,4 @@
-generate_hcl "_terramate_generated_main_btp.tf" {
+generate_hcl "_terramate_generated_main_cf.tf" {
   stack_filter {
     project_paths = [
       "stacks/prod/cf*",
