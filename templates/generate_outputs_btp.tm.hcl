@@ -7,9 +7,34 @@ generate_hcl "_terramate_generated_output_btp.tf" {
   }
 
   content {
+    output "globalaccount" {
+      value       = var.globalaccount
+      description = "The globalaccount subdomain where the sub account shall be created."
+    }
+
+    output "btp_username" {
+      value       = var.btp_username
+      description = "The username for the SAP BTP account."
+    }
+
     output "subaccount_id" {
       value       = btp_subaccount.integration_suite.id
       description = "The ID of the subaccount."
+    }
+
+    output "pi_administrator" {
+      value       = var.pi_administrator
+      description = "The email address of the PI administrator."
+    }
+
+    output "pi_business_expert" {
+      value       = var.pi_business_expert
+      description = "The email address of the PI business expert."
+    }
+
+    output "pi_intgration_developer" {
+      value       = var.pi_intgration_developer
+      description = "The email address of the PI integration developer."
     }
 
     output "cf_org_id" {

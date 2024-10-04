@@ -1,4 +1,4 @@
-generate_file "terraform.tfvars.sample" {
+generate_file "_terramate_terraform.tfvars.sample" {
   stack_filter {
     project_paths = [
       "stacks/prod/btp*",
@@ -15,6 +15,9 @@ generate_file "terraform.tfvars.sample" {
     globalaccount            = "${let.trialplaceholder}"
     btp_username             = "email-associated-with-s-user-id@your-company.com"
     integration_provisioners = ["email-associated-with-s-user-id@your-company.com"]
+    pi_administrator         = ["email-associated-with-s-user-id@your-company.com"]
+    pi_business_expert       = ["email-associated-with-s-user-id@your-company.com"]
+    pi_integration_developer = ["email-associated-with-s-user-id@your-company.com"]
     cf_org_admins            = []
     cf_org_users             = []
     cf_space_developers      = ["email-associated-with-s-user-id@your-company.com"]

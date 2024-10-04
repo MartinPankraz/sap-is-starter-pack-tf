@@ -14,6 +14,28 @@ generate_hcl "_terramate_generated_main_btp.tf" {
   }
 
   content {
+
+    resource "btp_subaccount_role_collection_assignment" "pi_administrator" {
+      for_each             = toset(var.pi_administrator)
+      user_name            = each.value
+      subaccount_id        = btp_subaccount.integration_suite.id
+      role_collection_name = "PI_Administrator"
+    }
+
+    resource "btp_subaccount_role_collection_assignment" "pi_business_expert" {
+      for_each             = toset(var.pi_business_expert)
+      user_name            = each.value
+      subaccount_id        = btp_subaccount.integration_suite.id
+      role_collection_name = "PI_Business_Expert"
+    }
+
+    resource "btp_subaccount_role_collection_assignment" "pi_integration_developer" {
+      for_each             = toset(var.pi_integration_developers)
+      user_name            = each.value
+      subaccount_id        = btp_subaccount.integration_suite.id
+      role_collection_name = "PI_Integration_Developer"
+    }
+
     # ------------------------------------------------------------------------------------------------------
     # Create Cloud Foundry space dev
     # ------------------------------------------------------------------------------------------------------

@@ -8,6 +8,37 @@ generate_hcl "_terramate_generated_variables.tf" {
 
   content {
     # ------------------------------------------------------------------------------------------------------
+    # BTP-specific variables
+    # ------------------------------------------------------------------------------------------------------
+    variable "globalaccount" {
+      type        = string
+      description = "The globalaccount subdomain where the sub account shall be created."
+    }
+
+    variable "btp_username" {
+      type        = string
+      description = "The username for the SAP BTP account."
+    }
+
+    variable "pi_administrator" {
+      type        = list(string)
+      description = "The email address of the PI administrator."
+      default     = []
+    }
+
+    variable "pi_business_expert" {
+      type        = list(string)
+      description = "The email address of the PI business expert."
+      default     = []
+    }
+
+    variable "pi_intgration_developer" {
+      type        = list(string)
+      description = "The email address of the PI integration developer."
+      default     = []
+    }
+
+    # ------------------------------------------------------------------------------------------------------
     # CF-specific variables
     # ------------------------------------------------------------------------------------------------------
     variable "cf_api_url" {

@@ -67,6 +67,24 @@ generate_hcl "_terramate_generated_variables.tf" {
       default     = []
     }
 
+    variable "pi_administrator" {
+      type        = list(string)
+      description = "The email address of the PI administrator."
+      default     = []
+    }
+
+    variable "pi_business_expert" {
+      type        = list(string)
+      description = "The email address of the PI business expert."
+      default     = []
+    }
+
+    variable "pi_intgration_developer" {
+      type        = list(string)
+      description = "The email address of the PI integration developer."
+      default     = []
+    }
+
     variable "instance_name" {
       type        = string
       description = "The name of the cloudfoundry environment instance."
