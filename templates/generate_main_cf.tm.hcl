@@ -30,7 +30,7 @@ generate_hcl "_terramate_generated_main_btp.tf" {
     }
 
     resource "btp_subaccount_role_collection_assignment" "pi_integration_developer" {
-      for_each             = toset(var.pi_integration_developers)
+      for_each             = toset(var.pi_integration_developer)
       user_name            = each.value
       subaccount_id        = var.subaccount_id
       role_collection_name = "PI_Integration_Developer"

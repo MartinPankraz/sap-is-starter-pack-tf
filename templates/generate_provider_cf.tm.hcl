@@ -26,6 +26,7 @@ generate_hcl "_terramate_generated_provider.tf" {
 
     provider "cloudfoundry" {
       api_url = var.cf_api_url
+      user    = var.btp_username
     }
   }
 }
