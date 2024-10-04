@@ -65,13 +65,13 @@ You have the option top deploy the setup either in a productive or a trial lands
 To initialize the setup for the trial stacks execute the following command:
 
 ```bash
-terramate run -X --tags trial terraform init
+terramate run -X --tags trial --parallel 2 terraform init
 ```
 
 To initialize the setup for the productions stacks execute the following command:
 
 ```bash
-terramate run -X --tags prod terraform init
+terramate run -X --tags prod --parallel 2 terraform init
 ```
 
 

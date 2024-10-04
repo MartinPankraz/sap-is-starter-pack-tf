@@ -102,9 +102,10 @@ generate_hcl "_terramate_generated_variables.tf" {
       description = "The name of the cloudfoundry organization."
 
       validation {
-        condition     = can(regex("^.{1,255}$", var.cf_org_name))
-        error_message = "The cloudfoundry org name must not be emtpy and not exceed 255 characters"
+        condition     = can(regex("^.{0,255}$", var.cf_org_name))
+        error_message = "The cloudfoundry org name must not exceed 255 characters"
       }
+      default = ""
     }
 
     variable "cf_org_id" {
