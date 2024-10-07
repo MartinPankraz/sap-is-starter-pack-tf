@@ -21,11 +21,14 @@ generate_hcl "_terramate_generated_main_btp.tf" {
     # ------------------------------------------------------------------------------------------------------
     resource "random_uuid" "uuid" {}
 
+    data "btp_globalaccount" "global_account" {}
+
     locals {
       random_uuid          = random_uuid.uuid.result
       subaccount_subdomain = lower("${var.subaccount_subdomain_prefix}-${local.random_uuid}")
       subaccount_name      = var.subaccount_name != "" ? var.subaccount_name : "${var.subaccount_subdomain_prefix}-${local.random_uuid}"
       subaccount_cf_org    = length(var.cf_org_name) > 0 ? var.cf_org_name : substr(replace("${local.subaccount_subdomain}", "-", ""), 0, 32)
+      parent_id            = var.parent_id != "" ? var.parent_id : data.btp_globalaccount.global_account.id
     }
 
     # ------------------------------------------------------------------------------------------------------
@@ -35,7 +38,7 @@ generate_hcl "_terramate_generated_main_btp.tf" {
       name      = local.subaccount_name
       subdomain = local.subaccount_subdomain
       region    = lower(var.region)
-      parent_id = var.parent_id
+      parent_id = local.parent_id
     }
 
     # ------------------------------------------------------------------------------------------------------
