@@ -37,6 +37,12 @@ generate_hcl "_terramate_generated_variables.tf" {
       default     = true
     }
 
+    variable "parent_id" {
+      type        = string
+      description = "ID of the parent account for the subaccount."
+      default     = ""
+    }
+
     variable "subaccount_subdomain_prefix" {
       type        = string
       description = "The prefix for the SAP BTP subaccount subdomain."

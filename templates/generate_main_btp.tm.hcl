@@ -35,6 +35,7 @@ generate_hcl "_terramate_generated_main_btp.tf" {
       name      = local.subaccount_name
       subdomain = local.subaccount_subdomain
       region    = lower(var.region)
+      parent_id = var.parent_id
     }
 
     # ------------------------------------------------------------------------------------------------------
