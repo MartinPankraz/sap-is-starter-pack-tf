@@ -13,6 +13,7 @@ generate_file "_terramate_terraform.tfvars.sample" {
   content = <<-EOF
     # Use this file to configure the BTP setup. Rename this file to terraform.tfvars and fill in the values for the variables.
     globalaccount            = "${let.trialplaceholder}"
+    parent_id                = ""
     btp_username             = "email-associated-with-s-user-id@your-company.com"
     integration_provisioners = ["email-associated-with-s-user-id@your-company.com"]
     pi_administrator         = ["email-associated-with-s-user-id@your-company.com"]

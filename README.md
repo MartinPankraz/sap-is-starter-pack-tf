@@ -33,11 +33,11 @@ You have the option top deploy the setup either in a productive or a trial lands
 1. Clone [this repository](https://github.com/MartinPankraz/sap-is-starter-pack-tf.git) to your local machine.
 1. Navigate to the `btp-setup` directory within the terramate stack of your choice.
 1. Use the `terraform.tfvars.sample` file to create a `terraform.tfvars` file with your details. Start with the global account trial subdomain, which ends with "-ga" and continue from there.
-1. Provide your BTP and CF credential (S-User password) as environment variable to avoid maintaining it as plain text variable on tfvars.
+1. Provide your BTP and CF credential (S-User or P-User password) as environment variable to avoid maintaining it as plain text variable on tfvars.
 
 ```bash
-    $env:BTP_PASSWORD='your-S-User-password'
-    $env:CF_PASSWORD='your-S-User-password'
+    $env:BTP_PASSWORD='your-S-User-o-P-User-password'
+    $env:CF_PASSWORD='your-S-User-o-P-User-password'
 ```
 
 1. Run `terramate generate` to initialize the Terramate managed Terraform configuration.
