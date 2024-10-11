@@ -30,6 +30,7 @@ provider "registry.terraform.io/sap/btp" {
   constraints = "~> 1.7.0"
   hashes = [
     "h1:CE5q9nr8dGzJxifLuPjcTYkbnXzG/81CrqvQxftIvMM=",
+    "h1:bLi9937EsvRWeI0B4l9snRccvLdwhqLa57ePh+mQNcg=",
     "zh:07c4b65e18c03d01fdd98d7aa666b7d707565fc431d84668f28239a5d128998d",
     "zh:0a21bc6533cd0bb7449b2a0b68ca982036c40364f214149790987475e2fce11e",
     "zh:11ec09bea89d32d4b10a82677001a37415fd46d5a462630456dee6781de652e2",
