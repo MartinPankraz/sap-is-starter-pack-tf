@@ -5,6 +5,7 @@ provider "registry.terraform.io/hashicorp/local" {
   version = "2.5.2"
   hashes = [
     "h1:6NIiHWMbE9bFZaUiqC+OokdWSbW7g3+yQYnO4yvgtuY=",
+    "h1:IyFbOIO6mhikFNL/2h1iZJ6kyN3U00jgkpCLUCThAfE=",
     "zh:136299545178ce281c56f36965bf91c35407c11897f7082b3b983d86cb79b511",
     "zh:3b4486858aa9cb8163378722b642c57c529b6c64bfbfc9461d940a84cd66ebea",
     "zh:4855ee628ead847741aa4f4fc9bed50cfdbf197f2912775dd9fe7bc43fa077c0",
@@ -24,6 +25,7 @@ provider "registry.terraform.io/hashicorp/random" {
   version = "3.6.3"
   hashes = [
     "h1:+UItZOLue/moJfnI3tqZBQbXUYR4ZnqPYfJDJPgLZy0=",
+    "h1:zG9uFP8l9u+yGZZvi5Te7PV62j50azpgwPunq2vTm1E=",
     "zh:04ceb65210251339f07cd4611885d242cd4d0c7306e86dda9785396807c00451",
     "zh:448f56199f3e99ff75d5c0afacae867ee795e4dfda6cb5f8e3b2a72ec3583dd8",
     "zh:4b4c11ccfba7319e901df2dac836b1ae8f12185e37249e8d870ee10bb87a13fe",
@@ -44,6 +46,7 @@ provider "registry.terraform.io/sap/btp" {
   constraints = "~> 1.7.0"
   hashes = [
     "h1:CE5q9nr8dGzJxifLuPjcTYkbnXzG/81CrqvQxftIvMM=",
+    "h1:bLi9937EsvRWeI0B4l9snRccvLdwhqLa57ePh+mQNcg=",
     "zh:07c4b65e18c03d01fdd98d7aa666b7d707565fc431d84668f28239a5d128998d",
     "zh:0a21bc6533cd0bb7449b2a0b68ca982036c40364f214149790987475e2fce11e",
     "zh:11ec09bea89d32d4b10a82677001a37415fd46d5a462630456dee6781de652e2",

@@ -149,6 +149,12 @@ generate_hcl "_terramate_generated_main_btp.tf" {
       })
     }
 
+    resource "btp_subaccount_service_binding" "destination_binding" {
+      subaccount_id       = btp_subaccount.integration_suite.id
+      service_instance_id = btp_subaccount_service_instance.destination.id
+      name                = "Binding for Integration Suite"
+    }
+
     # ------------------------------------------------------------------------------------------------------
     # Write output variables to local file
     # ------------------------------------------------------------------------------------------------------
